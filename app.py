@@ -18,9 +18,22 @@ today = datetime.datetime.today()
 
 # api.update_status("Another tweet from Becky's laptop")
 
-response = requests.get(f'https://api.weatherbit.io/v2.0/current?city=Raleigh,NC&key={secret.WEATHER_API_KEY}')
+response = requests.get(f'https://api.weatherbit.io/v2.0/current?&lat=24.8983&lon=-77.9318&key={secret.WEATHER_API_KEY}')
 data = response.json()
-print("***************", today)
+# print("***************", data['data'][0]['wind_spd'])
+
+def pull_facts(data):
+    data = data['data'][0]
+    wind = ms_to_kns(data['wind_spd'])
+    return wind
 
 # funcs to pull data out of request
 # func to determine time of when to tweet
+
+def ms_to_kns(ms):
+    """converting m/s to knots for wind spd"""
+    kns = ms * 1.943844
+    return kns
+
+
+print("****************", )
